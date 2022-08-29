@@ -1,5 +1,5 @@
 """
-    Name: dcttools/ua_remove_slashes.py
+    Name: dcttools/ua_list_remove_slashes.py
     Date: Aug 29th, 2022
     Author: Mr-Market (sp)
 
