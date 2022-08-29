@@ -1,4 +1,4 @@
-# Dct-Tools
+# DCT-Tools
 Command line scripts for working with DCT settop IDs.
 
 ## How to use:
