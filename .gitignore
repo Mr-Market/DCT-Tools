@@ -1,2 +1,9 @@
 # ignore ALL files in pychache directory
 __pycache__/
+
+#Ignore Python Virtual Enc
+virtual_env/
+
+#Ignore folders
+build/
+archived/
