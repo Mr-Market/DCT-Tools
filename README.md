@@ -12,10 +12,7 @@ Command line scripts for working with DCT settop IDs.
 
 ## How to use:
 1. Place UA list into input.txt
-2. Run the script with desired option
-    e.g.
-    python3 dcttools.py -h
-    dcttools -h 
+2. Run the script with desired option -> e.g. "python3 dcttools.py -h" OR "dcttools -h" 
 3. See screen output or output.txt
 
 ## Add Slashes To a List Of UA's
