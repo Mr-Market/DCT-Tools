@@ -8,9 +8,9 @@ VERSION = "1.0.0"
 
 class colors:
 
-    #BLUE = '\033[94m'
+    BLUE = '\033[94m'
     #GREEN = '\033[92m'
-    RED = '\033[31m'
+    #RED = '\033[31m'
     #YELLOW = '\033[93m'
     #FAIL = '\033[91m'
     ENDC = '\033[0m'
@@ -19,7 +19,7 @@ class colors:
     #WHITE = '\033[37m'
 
 def logo():
-    print(colors.RED + colors.BOLD)
+    print(colors.BLUE + colors.BOLD)
     print("""
 
   _____   _____ _______ _              _     
@@ -29,7 +29,7 @@ def logo():
  | |__| | |____   | |  | || (_) | (_) | \__ 
  |_____/ \_____|  |_|   \__\___/ \___/|_|___/
 
-	{V} - https://github.com/Mr-Market/DCT-Tools
+{V} - https://github.com/Mr-Market/DCT-Tools
 
     """.format(V=VERSION))
     print(colors.ENDC)
@@ -98,6 +98,7 @@ def ua_list_remove_slashes():
     """
         Description: Take a list of dct unit addresses and remove all slashes
         Example: 000-04395-30485-103 -> 0000439530485103
+
 
         How To Use:
         1. Place your list of DCT Unit Addresses with hyhens into the input.txt file
