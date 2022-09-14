@@ -1,25 +1,23 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
+import os
 import sys 
 import getopt
+import shutil
 
-VERSION = "1.0.0"
+VERSION = "1.0.1"
 
 class colors:
 
-    BLUE = '\033[94m'
-    #GREEN = '\033[92m'
-    #RED = '\033[31m'
-    #YELLOW = '\033[93m'
+    #BLUE = '\033[94m'
+    RED = '\033[31m'
     #FAIL = '\033[91m'
     ENDC = '\033[0m'
     BOLD = '\033[1m'
-    #BGRED = '\033[41m'
-    #WHITE = '\033[37m'
 
 def logo():
-    print(colors.BLUE + colors.BOLD)
+    print(colors.RED + colors.BOLD)
     print("""
 
   _____   _____ _______ _              _     
@@ -38,11 +36,11 @@ def usage():
     logo()
     print("""
     DCTtools usage:
+    -i    --input       Open Input.txt
+    -o    --output      Open Output.txt
     -a    --uaadd       Add Slashes To a List of UA's
     -r    --uarem       Remove Slashes From a List of UA's
-    -h    --help        print(this help and exit)
-    -     --future      Future Use
-    -     --future      Future Use
+    -h    --help        Show Help & Exit
     """)
     sys.exit()
 
@@ -56,17 +54,17 @@ def truncate(file):
 
 def open_files():
     """
-        Future Use. So we don't manually open the files each time.
+        Open needed files
     """
-    #inputfile = open('input.txt', 'r')
-    #output = open('output.txt', 'w')
+    inputfile = open('input.txt', 'r')
+    output = open('output.txt', 'w')
     
 def close_files():
     """
-        Future Use. So we don't manually close files each time.
+        Close opened files
     """
-    #inputfile.close()
-    #output.close()
+    inputfile.close()
+    output.close()
 
 def ua_list_add_slashes():
     """
@@ -74,7 +72,7 @@ def ua_list_add_slashes():
         Example: 0000439530485103 -> 000-04395-30485-103
 
         How To Use:
-        1. Place your list of DCT Unit Addresses without hyhens into the input.txt file
+        1. Place your list of DCT Unit Addresses without hyphens into the input.txt file
         2. Run the script using "-a" or "--uaadd" option
         3. See on screen or in output.txt for the list of Unit addresses with the hyphens added
     """
@@ -123,15 +121,36 @@ def ua_list_remove_slashes():
     #Truncate input file
     truncate("input.txt")
 
+def access_file(file):
+    """
+        Opens a file, in this case, input.txt or output.txt, to view file contents.
+        Editor attemot order -> 1. Gedit, 2. Nano, 3. vi
+
+        To Do: 1. Add notepad.exe option + mac.
+    """
+    #print(file) #Test
+
+    if shutil.which('gedit') is not None:
+        print("Gedit exists...Opening" + " " + file + " " + "with Gedit")
+        os.system("gedit" + " " + file)
+    elif shutil.which('nano') is not None:
+        print("Nano exists...Opening" + " " + file + " " + "with Nano")
+        os.system("nano" + " " + file)
+    elif shutil.which('vi') is not None:
+        print("Vi exists...Opening" + " " + file + " " + "with Vi")
+        os.system("vi" + " " + file)
+    #To Do: Add option for notepad.exe and mac text editor
+    else:
+        print("Gedit, Nano, or vi do not exist. Unable to open" + " " + file)
+    
+        
 
 def main():
-    #check_root()
     if len(sys.argv) <= 1:
-        #check_update()
         usage()
     try:
-        (opts, args) = getopt.getopt(sys.argv[1:], 'arxhu', [
-            'uaadd', 'stop', 'uarem', 'help', 'update'])
+        (opts, args) = getopt.getopt(sys.argv[1:], 'aroixhu', [
+            'uaadd', 'input', 'output', 'uarem', 'help'])
     except (getopt.GetoptError):
         usage()
         sys.exit(2)
@@ -140,8 +159,12 @@ def main():
             usage()
         elif o in ('-a', '--uaadd'):
             ua_list_add_slashes()
-        #elif o in ('-x', '--stop'):
-            #usage()
+        elif o in ('-i', '--input'):
+            file = "input.txt"
+            access_file(file)
+        elif o in ('-o', '--output'):
+            file = "output.txt"
+            access_file(file)
         elif o in ('-r', '--uarem'):
             ua_list_remove_slashes()
         #elif o in ('-u', '--update'):
